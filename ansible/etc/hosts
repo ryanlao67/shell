@@ -1,0 +1,215 @@
+[e1athena-live]
+34.197.87.58
+34.202.255.191
+
+[e1athena-staging]
+34.224.35.183
+34.224.130.35
+
+[sge1prdgdmngx]
+10.160.114.163
+10.160.115.203
+
+[mpls-squid-sg]
+10.160.114.114
+10.160.114.122
+
+[mpls-squid-cn]
+10.163.9.141
+10.163.13.179
+
+[sge1prdpdngx]
+10.160.114.154
+10.160.115.110
+
+[sge1stgpdngx]
+10.160.130.55
+
+[cne1stgpdngx]
+10.163.25.29
+10.163.29.163
+
+[cne1prdpdngx]
+10.163.9.202
+10.163.13.249
+
+[cne1prdgdmngx]
+10.163.9.251
+10.163.13.130
+
+[mpls-squid-test]
+10.160.130.119
+10.163.25.139
+
+[cne1prdgdmblg]
+10.163.8.193
+
+[sge1prdgdmblg]
+10.160.112.13
+10.160.113.186
+
+[bj-nw-tn]
+CNBAM-E1-GRETunnel01 ansible_ssh_host=10.163.11.44
+CNBAM-E1-GRETunnel02 ansible_ssh_host=10.163.15.46
+CNBAM-E1-GRETunnel03 ansible_ssh_host=10.163.31.88
+#CNBAM-E1-GRETunnel03 ansible_ssh_host=10.163.31.70
+
+[bj-nw-vpn]
+CNBAM-E1-VPN01 ansible_ssh_host=10.163.11.20
+CNBAM-E1-VPN02 ansible_ssh_host=10.163.15.20
+CNBAM-E1-VPN03 ansible_ssh_host=10.163.27.20
+#CNBAM-E1-VPN01 ansible_ssh_host=10.163.11.10
+#CNBAM-E1-VPN02 ansible_ssh_host=10.163.15.10
+#CNBAM-E1-VPN03 ansible_ssh_host=10.163.27.10
+
+[sg-nw-tn]
+E1EF-AWS-GRETunnel01 ansible_ssh_host=10.160.119.78
+E1EF-AWS-GRETunnel02 ansible_ssh_host=10.160.119.88
+E1EF-AWS-GRETunnel03 ansible_ssh_host=10.160.135.72
+
+[sg-nw-vpn]
+E1EF-AWS-VPN01 ansible_ssh_host=10.160.119.22
+E1EF-AWS-VPN02 ansible_ssh_host=10.160.119.40
+E1EF-AWS-VPN03 ansible_ssh_host=10.160.135.21
+#E1EF-AWS-VPN01 ansible_ssh_host=10.160.119.13
+#E1EF-AWS-VPN02 ansible_ssh_host=10.160.119.54
+#E1EF-AWS-VPN03 ansible_ssh_host=10.160.135.7
+
+[gdm-cn-blog]
+CNE1PRDGDMBLG-02 ansible_ssh_host=10.163.8.193
+SGE1PRDGDMBLG-01 ansible_ssh_host=10.160.112.13
+SGE1PRDGDMBLG-02 ansible_ssh_host=10.160.113.186
+
+[sg-prd]
+SGE1PRDPDNGX-02 ansible_ssh_host=10.160.115.110
+SGE1PRDPDNGX-01 ansible_ssh_host=10.160.114.154
+SGE1PRDGDMNGX-01 ansible_ssh_host=10.160.114.163
+#SGE1PRDITIS_CORE ansible_ssh_host=10.160.119.8
+SGE1PRDMPLSPROXY ansible_ssh_host=10.160.114.114
+SGE1PRDMPLSPROXY-02 ansible_ssh_host=10.160.115.226
+SGE1PRDGDMNGX-02 ansible_ssh_host=10.160.115.203
+SGE1PRDZABX-01 ansible_ssh_host=10.160.114.182
+SGE1PRDGDMBLG-01 ansible_ssh_host=10.160.112.13
+SGE1PRDGDMBLG-02 ansible_ssh_host=10.160.113.186
+
+[sg-stg]
+SGE1STGPDNGX-01 ansible_ssh_host=10.160.130.55
+SGE1QAOMNI-UI-CI ansible_ssh_host=10.160.128.164
+SGE1STGOMNI-CI-LINUX ansible_ssh_host=10.160.128.189
+SGE1POCLLXAPI ansible_ssh_host=10.160.131.88
+SGE1STGITISKIBANA ansible_ssh_host=10.160.131.78
+
+
+[bj-stg]
+CNE1STGPDNGX-01 ansible_ssh_host=10.163.25.29
+CNE1STGPDNGX-02 ansible_ssh_host=10.163.29.163
+
+
+[bj-qa]
+CNE1QAMPLSPROXY  ansible_ssh_host=10.163.31.74
+
+
+[bj-prd]
+CNE1PRDPDNGX-02 ansible_ssh_host=10.163.13.249
+CNE1PRDMPLSPROXY ansible_ssh_host=10.163.13.179
+CNE1PRDMPLSPROXY2 ansible_ssh_host=10.163.9.141
+CNE1PRDPDNGX-01 ansible_ssh_host=10.163.9.202
+CNE1PRDGDMNGX-01 ansible_ssh_host=10.163.9.251
+CNE1PRDGDMNGX-02 ansible_ssh_host=10.163.13.130
+CNE1PRDZABX-01 ansible_ssh_host=10.163.13.99
+CNE1QAOMNI-UI-CI ansible_ssh_host=10.163.24.162
+CNE1JENKINS-MASTER ansible_ssh_host=10.163.24.95
+CNE1PRDGDMBLG-01 ansible_ssh_host=10.163.13.195
+CNE1PRDGDMBLG-02 ansible_ssh_host=10.163.8.193
+CNE1PRDITIS-CORE ansible_ssh_host=10.163.9.240
+CNE1STGPDBECI02 ansible_ssh_host=10.163.25.168
+
+[bj-all:children]
+bj-prd
+bj-stg
+
+[sg-all:children]
+sg-prd
+sg-stg
+
+[all-servers:children]
+bj-all
+sg-all
+
+[CNE1PRDMONGO]
+10.163.8.239
+10.163.12.48
+
+[SGE1STGMONGO]
+10.160.128.90
+10.160.129.19
+
+[SGE1STGMONGO-01]
+10.160.128.90
+
+[SGE1STGMONGO-02]
+10.160.129.19
+
+[CNE1STGMONGO]
+10.163.24.96
+10.163.28.89
+
+[CNE1STGMONGO-01]
+10.163.24.96
+
+[CNE1STGMONGO-02]
+10.163.28.89
+
+[container-cn]
+"ECS Instance - EC2ContainerService-xAPI-Front-Cluster" ansiable_ssh_host=10.163.25.142 ansible_user='ec2-user'
+"ECS Instance - EC2ContainerService-xAPI-Front-Cluster" ansiable_ssh_host=10.163.29.225 ansible_user='ec2-user'
+"ECS Instance - EC2ContainerService-CNE1QAAPIG-ECS-CLUSTER" ansiable_ssh_host=10.163.29.56 ansible_user='ec2-user'
+"ECS Instance - EC2ContainerService-CNE1QAAPIG-ECS-CLUSTER" ansiable_ssh_host=10.163.25.243 ansible_user='ec2-user'
+"ECS Instance - EC2ContainerService-xAPI-Front-Cluster-PRD" ansiable_ssh_host=10.163.9.82 ansible_user='ec2-user'
+"ECS Instance - EC2ContainerService-xAPI-Front-Cluster-PRD" ansiable_ssh_host=10.163.13.123 ansible_user='ec2-user'
+"ECS Instance - EC2ContainerService-xAPI-Back-Cluster-PRD" ansiable_ssh_host=10.163.13.234 ansible_user='ec2-user'
+"ECS Instance - EC2ContainerService-xAPI-Back-Cluster-PRD" ansiable_ssh_host=10.163.9.243 ansible_user='ec2-user'
+"ECS Instance - EC2ContainerService-SharedServiceQACluster" ansiable_ssh_host=10.163.24.141 ansible_user='ec2-user'
+
+[mongo:children]
+SGE1STGMONGO
+CNE1STGMONGO
+
+[CNE1QAATHENANGINX-01]
+10.163.25.4
+
+[CNE1GDMCMP]
+CNE1PRDGDMCMP-01 ansible_ssh_host=10.163.8.17
+CNE1QAGDMCMP-01 ansible_ssh_host=10.163.24.210
+CNE1STGGDMCMP-01 ansible_ssh_host=10.163.24.178
+
+[SGE1GDMCMP]
+SGE1PRDGDMCMP-01 ansible_ssh_host=10.160.112.167
+SGE1STGGDMCMP-01 ansible_ssh_host=10.160.128.242
+
+[emr]
+10.163.25.209
+
+[CNE1BSDCIFE01]
+10.163.30.23
+
+[SGE1BSDCIFE01]
+10.160.134.40
+[sg-omni-jenkins-slave]
+10.160.134.40
+10.160.134.51
+
+[SGE1STGGDMBLG]
+10.160.128.125
+10.160.129.199
+
+[CNE1QAGDMBLG]
+10.163.25.58
+
+[CNE1STGGDMBLG]
+10.163.25.89
+
+[internal-dns]
+sge1prditisdns-01 ansible_ssh_host=10.160.134.12
+cne1prditisdns-01 ansible_ssh_host=10.163.30.47
+

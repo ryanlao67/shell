@@ -1,0 +1,6 @@
+*.list
+e1athena-staging-nginx
+squid
+e1athena-live-nginx
+EC2-Linux-Collectd
+sge1prdgdmngx

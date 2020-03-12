@@ -1,0 +1,10 @@
+- hosts: "{{ hosts }}"
+  #remote_user: root
+  remote_user: ubuntu
+  tasks:
+    - name: "copy itis-ansible-public-key for remote control"
+      template: src=../templates/ansible-client-pub-key.j2 dest=~/ansible-client-pub-key
+
+    - name: "proceed {{ raw }}"
+      raw: "cat ansible-client-pub-key >> ~/.ssh/authorized_keys"
+

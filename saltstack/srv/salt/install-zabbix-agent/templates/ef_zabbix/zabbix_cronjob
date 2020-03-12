@@ -1,0 +1,3 @@
+### zabbix cron job ###
+*/2 * * * * zabbix bash /var/lib/ef_zabbix/cron/ef_vmstat_cron.sh
+*/2 * * * * zabbix bash /var/lib/ef_zabbix/cron/ef_iostat_cron.sh

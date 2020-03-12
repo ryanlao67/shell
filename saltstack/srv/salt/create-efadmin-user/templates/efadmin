@@ -1,0 +1,3 @@
+# User rules for  efadmin create by EF salt master.
+efadmin ALL=(ALL) NOPASSWD:ALL
+

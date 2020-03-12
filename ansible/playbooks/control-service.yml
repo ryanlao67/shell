@@ -1,0 +1,9 @@
+- hosts: "{{ hosts }}"
+  remote_user: ubuntu
+  become: yes
+  become_user: root
+  become_method: sudo
+  tasks:
+    - name: "proceed {{ stat }} {{ service }}"
+      service: name={{ service }} state={{ stat }}
+

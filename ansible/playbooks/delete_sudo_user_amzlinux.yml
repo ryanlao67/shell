@@ -1,0 +1,38 @@
+- hosts: "{{ servers_var }}"
+  remote_user: "{{ rmuser }}"
+  become: yes
+  become_user: root
+  become_method: sudo
+
+#    users: efadmin
+  handlers:
+  - name:  Restart ssh
+    service: name=sshd state=restarted
+  tasks:
+     - name: Remove {{users}}
+       user: 
+        name="{{users}}" 
+        state=absent
+        remove=yes
+
+     - name: Remove sudo permissions for {{users}} - STEP1
+       file: 
+        state=absent
+        path=/etc/sudoers.d/{{users}}
+
+     - name: Remove sudo permissions for {{users}} - STEP2
+       lineinfile:
+        dest=/etc/sudoers.d/cloud-init
+        state=absent
+        line='{{users}} ALL=(ALL) NOPASSWD:ALL'
+
+     - name: "[SSH] Remove ssh login users {{users}}"
+       lineinfile:
+        dest=/etc/ssh/sshd_config
+        state=absent
+        line="AllowUsers ubuntu ec2-user efadmin@10.160.119.8 efadmin@10.163.9.240 {{users}}@10.128.32.0/19"
+       notify:
+         Restart ssh
+     - name : 'restart sshd'
+       shell: service sshd restart
+

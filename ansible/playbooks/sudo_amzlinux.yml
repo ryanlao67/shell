@@ -1,0 +1,92 @@
+- hosts: "{{ servers_var }}"
+  remote_user: "{{ rmuser }}"
+  become: yes
+  become_user: root
+  become_method: sudo
+#  vars_prompt:
+#    - confirm: no
+#      name: PASSWORD_EFADMIN
+#      private: yes
+#      prompt: Enter efadamin password:
+  vars:
+    PASSWORD_EFADMIN: "{}"
+    PASSWORD_DEFAULT: "{}"
+
+#    users: efadmin
+  handlers:
+  - name:  Restart ssh
+    service: name=sshd state=restarted
+  tasks:
+     - name: Create the user efadmin
+       user: 
+        name="efadmin"
+        uid=2000 
+        append=yes
+        password="{{ PASSWORD_EFADMIN }}"
+        shell="/bin/bash"
+        state=present
+        update_password=always
+
+     - name: Create the user {{users}}
+       user: 
+        name="{{users}}" 
+        password="{{ PASSWORD_DEFAULT }}"
+        append=yes
+        shell="/bin/bash"
+        state=present
+        update_password=always
+
+     - name: Ensure sudo permissions for efadmin
+       template:
+        src: ../templates/sudoers.efadmin.conf.j2
+        dest: /etc/sudoers.d/efadmin
+        owner: root
+        group: root
+        mode: 0440
+
+     - name: Ensure sudo permissions for efadmin
+       lineinfile:
+        dest=/etc/sudoers.d/cloud-init
+        state=present
+        line='efadmin  ALL=(ALL) NOPASSWD:ALL'
+
+
+     - name: Ensure sudo permissions for {{users}} - STEP1
+       template:
+        src: ../templates/sudoers.conf.j2
+        dest: /etc/sudoers.d/{{users}}
+        owner: root
+        group: root
+        mode: 0440
+
+     - name: Ensure sudo permissions for {{users}} - STEP2
+       lineinfile:
+        dest=/etc/sudoers.d/cloud-init
+        state=present
+        line='{{users}} ALL=(ALL) NOPASSWD:ALL'
+
+
+     - name: '[SSH] allow password auth - step1'
+       lineinfile:
+        dest=/etc/ssh/sshd_config
+        state=absent
+        line='PasswordAuthentication no'
+       notify:
+         Restart ssh
+
+     - name: '[SSH] allow password auth - step2'
+       lineinfile:
+        dest=/etc/ssh/sshd_config
+        state=present
+        line='PasswordAuthentication yes'
+       notify:
+         Restart ssh
+     - name: '[SSH] Enforce ssh login users'
+       lineinfile:
+        dest=/etc/ssh/sshd_config
+        state=present
+        line="AllowUsers ubuntu ec2-user efadmin@10.160.119.8 efadmin@10.163.9.240 {{users}}@10.128.32.0/19"
+       notify:
+         Restart ssh
+     - name : 'restart sshd'
+       shell: service sshd restart
